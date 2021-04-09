@@ -21,7 +21,7 @@ function App() {
   const removeFromCart = (plant) => {
     setCart(cart.filter((p) => p.id !== plant.id));
   };
-
+  
   return (
     <div>
       <Router>

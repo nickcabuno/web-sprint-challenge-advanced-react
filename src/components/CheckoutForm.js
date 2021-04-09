@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import useForm from '../hooks/useForm';
+
+//started trying to make error messages and lightmode
+//and clearForm and it started getting a little messy  
+//so at this point figured i might as well submit
 
 const initialValue = {
   firstName: "",
@@ -9,20 +14,59 @@ const initialValue = {
   zip: "",
 };
 
+// const errorData = {
+//   firstName: "",
+//   lastName: "",
+//   address: "",
+//   city: "",
+//   state: "",
+//   zip: "",
+// }
+
 // This form should be handled by a "useForm" custom hook
 // Build out the logic needed for a form custom hook (see the useForm.js file)
 // and replace the necessary stateful logic from CheckoutForm with the hook
 
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [values, setValues] = useState(initialValue);
+  const [values, handleChanges, clearForm] = useForm(initialValue);
+  // const [errors, setErrors] = useState(errorData);
 
-  const handleChanges = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  // const errorHandling = (fieldName, fieldValue) => {
+  //     if (fieldName === "firstName" && fieldValue.length < 2)
+  //     return `${fieldName} must have at least 2 characters.`;
+
+  //     if (fieldName === "lastName" && fieldValue.length < 2)
+  //     return `${fieldName} must have at least 2 characters.`;
+
+  //     if (fieldName === "address" && fieldValue === "")
+  //     return `${fieldName} is a required field.`;
+
+  //     if (fieldName === "city" && fieldValue === "")
+  //     return `${fieldName} is a required field.`;
+
+  //     if (fieldName === "state" && fieldValue === "")
+  //     return `${fieldName} is a required field.`;
+
+  //     if (fieldName === "zip" && fieldValue.length < 5)
+  //     return `${fieldName} must be a real zip.`;
+    
+  //   return "";
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+  //   const submitErrors = {};
+  //   Object.keys(errors).forEach(field => {
+  //     submitErrors[field] = errorHandling(field, form[field])
+  //   });
+    
+  //   setErrors(submitErrors);
+    
+  //   const hasErrors = (submitErrors.firstName === "" && submitErrors.lastName === "" && submitErrors.email === "" && submitErrors.message === "");
+  //   setDisplayData(hasErrors);
+
     setShowSuccessMessage(true);
   };
 
