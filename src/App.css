@@ -3,6 +3,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  
 }
 
 .container {
@@ -251,3 +252,29 @@ pre {
   color: #0e101c;
   border-bottom: 2px solid !important;
 }
+
+.dark-mode {
+  color: #fff;
+  background-color: #ffffff;
+}
+
+.dark-mode__toggle {
+  background: papayawhip;
+  border-radius: 50px;
+  border: 1px solid black;
+  height: 20px;
+  width: 40px;
+  }
+
+  .toggle {
+  background: #f68819;
+  border-radius: 50px;
+  height: 18px;
+  left: 0;
+  transition: 0.2s;
+  width: 20px;
+  }
+
+  .toggled {
+  left: 18px;
+  }

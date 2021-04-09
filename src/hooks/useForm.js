@@ -6,13 +6,10 @@ const useForm = (initialValue) => {
     const [values, setValues] = useLocalStorage("form", initialValue);;
   
     const handleChanges = (e) => {
-        // const errorMessage = errorHandling(e.target.name, e.target.value);
 
-        // if (errorMessage !== "") {
-        //     setDisplayData(false);
-        //   }
-
-        setValues({ ...values, [e.target.name]: e.target.value });
+        setValues({ 
+            ...values, [e.target.name]: e.target.value 
+        });
     };
 
     //tried adding clearForm because i didn't like how 

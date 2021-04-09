@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import useForm from '../hooks/useForm';
 
-//started trying to make error messages and lightmode
-//and clearForm and it started getting a little messy  
-//so at this point figured i might as well submit
+//tried to make error messages and a clearForm function but ran out of time
 
 const initialValue = {
   firstName: "",
@@ -14,14 +12,14 @@ const initialValue = {
   zip: "",
 };
 
-// const errorData = {
-//   firstName: "",
-//   lastName: "",
-//   address: "",
-//   city: "",
-//   state: "",
-//   zip: "",
-// }
+const errorData = {
+  firstName: "",
+  lastName: "",
+  address: "",
+  city: "",
+  state: "",
+  zip: "",
+}
 
 // This form should be handled by a "useForm" custom hook
 // Build out the logic needed for a form custom hook (see the useForm.js file)
@@ -30,45 +28,52 @@ const initialValue = {
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [values, handleChanges, clearForm] = useForm(initialValue);
-  // const [errors, setErrors] = useState(errorData);
+  const [errors, setErrors] = useState(errorData);
 
-  // const errorHandling = (fieldName, fieldValue) => {
-  //     if (fieldName === "firstName" && fieldValue.length < 2)
-  //     return `${fieldName} must have at least 2 characters.`;
+  const errorHandling = (fieldName, fieldValue) => {
+      if (fieldName === "firstName" && fieldValue.length < 2)
+      return `${fieldName} must have at least 2 characters.`;
 
-  //     if (fieldName === "lastName" && fieldValue.length < 2)
-  //     return `${fieldName} must have at least 2 characters.`;
+      if (fieldName === "lastName" && fieldValue.length < 2)
+      return `${fieldName} must have at least 2 characters.`;
 
-  //     if (fieldName === "address" && fieldValue === "")
-  //     return `${fieldName} is a required field.`;
+      if (fieldName === "address" && fieldValue === "")
+      return `${fieldName} is a required field.`;
 
-  //     if (fieldName === "city" && fieldValue === "")
-  //     return `${fieldName} is a required field.`;
+      if (fieldName === "city" && fieldValue === "")
+      return `${fieldName} is a required field.`;
 
-  //     if (fieldName === "state" && fieldValue === "")
-  //     return `${fieldName} is a required field.`;
+      if (fieldName === "state" && fieldValue === "")
+      return `${fieldName} is a required field.`;
 
-  //     if (fieldName === "zip" && fieldValue.length < 5)
-  //     return `${fieldName} must be a real zip.`;
+      if (fieldName === "zip" && fieldValue.length < 5)
+      return `${fieldName} must be a real zip.`;
     
-  //   return "";
-  // }
+    return "";
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-  //   const submitErrors = {};
-  //   Object.keys(errors).forEach(field => {
-  //     submitErrors[field] = errorHandling(field, form[field])
-  //   });
+    const submitErrors = {};
+    Object.keys(errors).forEach(field => {
+      submitErrors[field] = errorHandling(field, values[field])
+    });
     
-  //   setErrors(submitErrors);
+    setErrors(submitErrors);
     
-  //   const hasErrors = (submitErrors.firstName === "" && submitErrors.lastName === "" && submitErrors.email === "" && submitErrors.message === "");
-  //   setDisplayData(hasErrors);
-
+ 
     setShowSuccessMessage(true);
   };
+
+  const handleErrors = (e) => {
+    const errorMessage = errorHandling(e.target.name, e.target.value);
+
+    setErrors({
+        ...errors,
+        [e.target.name]: errorMessage
+    });
+  }
 
   return (
     <>
