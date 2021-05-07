@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import axios from 'axios';
 
 import LightMode from "./components/LightMode"
 import { useLightMode } from "./hooks/useLightMode";
@@ -12,7 +11,6 @@ import "./App.css";
 
 function App() {
   //light mode
-  //wasn't able to get light mode fully functional, it changes it's own background when toggled but not the whole page
   const [lightMode, setLightMode] = useLightMode(false);
 
   // array of plants that have been added to the cart
@@ -29,16 +27,16 @@ function App() {
   };
 
   return (
-    <div>
+    <div className={lightMode ? "light-mode body" : "body"}>
       <Router>
         <nav className="container">
           <h1>
             React Plants <span role="img">🌿</span>
           </h1>
-          <div className={lightMode ? "body dark-mode" : "body"}>
-            <LightMode lightMode={lightMode} setLightMode={setLightMode} />
-          </div>
           <ul className="steps">
+            <li>
+              <LightMode lightMode={lightMode} setLightMode={setLightMode} />
+            </li>
             <li>
               <NavLink exact to="/">
                 Plants
